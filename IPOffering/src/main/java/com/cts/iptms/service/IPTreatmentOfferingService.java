@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cts.iptms.exceptionhandling.PackageDetailNotFoundException;
 import com.cts.iptms.model.IPTreatmentPackage;
 import com.cts.iptms.model.SpecialistDetail;
 import com.cts.iptms.repositories.IPTreatmentPackageRepository;
@@ -33,6 +34,9 @@ public class IPTreatmentOfferingService {
 	public List<IPTreatmentPackage> getIPTreatmentPackageByName(String packageName) {
 		log.info("START");
 		List<IPTreatmentPackage> ipTreatmentPackage = iprepository.findByName(packageName);
+		if(ipTreatmentPackage.isEmpty()||ipTreatmentPackage==null) {
+			throw new PackageDetailNotFoundException(packageName);
+		}
 		log.debug("Package details: {}", ipTreatmentPackage);
 		log.info("END");
 		return ipTreatmentPackage;
