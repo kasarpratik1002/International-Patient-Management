@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
 		
 		
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(true));
-		return new ResponseEntity<Object>(exceptionResponse,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(exceptionResponse,HttpStatus.NOT_FOUND);
 	}
 	
 
@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
 		
 		
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(true));
-		return new ResponseEntity<Object>(exceptionResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(exceptionResponse,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 

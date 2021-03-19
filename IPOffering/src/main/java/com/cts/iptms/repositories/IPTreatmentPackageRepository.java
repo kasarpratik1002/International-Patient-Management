@@ -11,7 +11,7 @@ import com.cts.iptms.model.IPTreatmentPackage;
 @Repository
 public interface IPTreatmentPackageRepository extends JpaRepository<IPTreatmentPackage, Integer> {
 	
-	//List<IPTreatmentPackage> findByName(String packageName);
+	
 	@Query(value=" from IPTreatmentPackage p where p.packageDetail.treatmentPackageName=:packageName")
 	List<IPTreatmentPackage> findByName(@Param("packageName") String packageName);
 }

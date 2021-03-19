@@ -19,5 +19,5 @@ public class PackageDetail {
 	private String testDetails;
 	private double cost;
 	private int treatmentDuration;
-	// duration is in weeks;
+	
 }

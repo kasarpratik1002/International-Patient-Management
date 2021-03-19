@@ -23,7 +23,7 @@ public class SpecialistDetail {
 	private int id;
 	private String name;
 	private String areaOfExpertise;
-	private int experience;// Experience is in years
+	private int experience;
 	private long contactNumber;
 
 }

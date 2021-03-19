@@ -15,27 +15,22 @@ import com.cts.iptms.service.IPTreatmentOfferingService;
 public class IPTreatmentController {
 	@Autowired
 	IPTreatmentOfferingService service;
-	
-	
-	
+
 	@GetMapping("/IPTreatementPackages")
 	public List<IPTreatmentPackage> getInPatientServicePackages() {
-		 List<IPTreatmentPackage> packages = service.getIPTreatmentPackages();
-		return packages;
+		return service.getIPTreatmentPackages();
+
 	}
-	
-	
+
 	@GetMapping("/IPTreatementPackageByName/{packageName}")
 	public List<IPTreatmentPackage> getIPTreatmentPackageByName(@PathVariable String packageName) {
-		List<IPTreatmentPackage> ipTreatmentPackageByName = service.getIPTreatmentPackageByName(packageName);
-		return ipTreatmentPackageByName;
+		return service.getIPTreatmentPackageByName(packageName);
+		
 	}
-	
-	
-	
+
 	@GetMapping("/Specialists")
-	public List<SpecialistDetail> getSpecialistDetails(){
-		List<SpecialistDetail> specialistDetails = service.getSpecialistDetails();
-		return specialistDetails;
+	public List<SpecialistDetail> getSpecialistDetails() {
+		return service.getSpecialistDetails();
+		
 	}
 }
