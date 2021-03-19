@@ -15,14 +15,15 @@ import lombok.extern.log4j.Log4j2;
 
 @Service
 @Log4j2
-public class IPTreatmentOfferingServiceimpl implements IPTreatmentOfferingService{
+public class IPTreatmentOfferingServiceimpl implements IPTreatmentOfferingService {
 
 	@Autowired
 	IPTreatmentPackageRepository iprepository;
 
 	@Autowired
 	SpecialistDetailsRepository specialistrepository;
-	private static final String START="START";
+	private static final String START = "START";
+	@Override
 	public List<IPTreatmentPackage> getIPTreatmentPackages() {
 		log.info(START);
 		List<IPTreatmentPackage> all = iprepository.findAll();
@@ -31,17 +32,18 @@ public class IPTreatmentOfferingServiceimpl implements IPTreatmentOfferingServic
 		return all;
 	}
 
+	@Override
 	public List<IPTreatmentPackage> getIPTreatmentPackageByName(String packageName) {
 		log.info(START);
 		List<IPTreatmentPackage> ipTreatmentPackage = iprepository.findByName(packageName);
-		if(ipTreatmentPackage.isEmpty()) {
+		if (ipTreatmentPackage.isEmpty()) {
 			throw new PackageDetailNotFoundException(packageName);
 		}
 		log.debug("Package details: {}", ipTreatmentPackage);
 		log.info("END");
 		return ipTreatmentPackage;
 	}
-
+	@Override
 	public List<SpecialistDetail> getSpecialistDetails() {
 		log.info(START);
 
