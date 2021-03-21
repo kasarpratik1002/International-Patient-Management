@@ -2,10 +2,11 @@ package com.cts.iptms.service;
 
 import java.util.List;
 
+import com.cts.iptms.exceptionhandling.InvalidTokenException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.cts.iptms.exceptionhandling.PackageDetailNotFoundException;
+import com.cts.iptms.model.AuthResponse;
 import com.cts.iptms.model.IPTreatmentPackage;
 import com.cts.iptms.model.SpecialistDetail;
 import com.cts.iptms.repositories.IPTreatmentPackageRepository;
@@ -21,8 +22,11 @@ public class IPTreatmentOfferingServiceimpl implements IPTreatmentOfferingServic
 	IPTreatmentPackageRepository iprepository;
 
 	@Autowired
+	AuthClient authClient;
+	@Autowired
 	SpecialistDetailsRepository specialistrepository;
 	private static final String START = "START";
+
 	@Override
 	public List<IPTreatmentPackage> getIPTreatmentPackages() {
 		log.info(START);
@@ -43,6 +47,7 @@ public class IPTreatmentOfferingServiceimpl implements IPTreatmentOfferingServic
 		log.info("END");
 		return ipTreatmentPackage;
 	}
+
 	@Override
 	public List<SpecialistDetail> getSpecialistDetails() {
 		log.info(START);
@@ -51,5 +56,21 @@ public class IPTreatmentOfferingServiceimpl implements IPTreatmentOfferingServic
 		log.debug("Specialists details: {}", specialists);
 		log.info("END");
 		return specialists;
+	}
+
+	@Override
+	public AuthResponse validateToken(String token) {
+		AuthResponse authResponse = null;
+		try {
+			authResponse = authClient.getValidity(token);
+			if (!authResponse.isValid()) {
+				throw new InvalidTokenException();
+			}
+		} catch (Exception e) {
+			throw new InvalidTokenException();
+		}
+
+		return authResponse;
+		
 	}
 }
